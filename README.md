@@ -10,3 +10,5 @@ This repository contains certain different files.
 2. role-bot.js (see 2.)
 3. verified.json (saves the users discord ID and their corresponding verified wallet address)
 4. roles.json (saves the users discord ID and the assigned discord roles as well as their holdings (assets) based on the policy ID's the role-bot.js scans.
+
+3./4. will be created automatically by the script when executed the first time
