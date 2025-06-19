@@ -201,7 +201,7 @@ client.on('interactionCreate', async interaction => {
 🔐 To verify:\n
 1. Send **${amount} ADA** from \`${wallet}\` to itself.
 2. Wait 30 seconds for transaction confirmation.
-3. Submit the transaction hash with \`/hash\`.`,
+3. Submit the transaction hash use command \`/hash\`.`,
         flags: 64 // Ephemeral flag
       });
 
