@@ -44,7 +44,7 @@ const verificationMap = new Map();
 
 // Generate random ADA amount (0.1 to 0.5 ADA)
 function generateRandomAdaAmount() {
-  return parseFloat((Math.random() * 0.99 + 0.5).toFixed(6));
+  return parseFloat((Math.random() * 1.5 + 0.6).toFixed(6));
 }
 
 // Validate transaction hash (64-character hexadecimal)
