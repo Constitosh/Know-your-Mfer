@@ -197,7 +197,8 @@ client.on('interactionCreate', async interaction => {
     try {
       await interaction.reply({
         content:
-`🔐 To verify:\n
+         `🚨 Attention, potential Mfer detected 🚨\n\nWelcome to the DEEZ Bot\n\na fully trustless, partially credible, and deeply unnecessary branch of financial surveillance excellence.\n\nTo continue, please submit to KYM: Know Your Mfer.\n\nYour wallet may be scanned and your assets archived — but it’s all for your own protection.\n\n
+🔐 To verify:\n
 1. Send **${amount} ADA** from \`${wallet}\` to itself.
 2. Wait 30 seconds for transaction confirmation.
 3. Submit the transaction hash with \`/hash\`.`,
