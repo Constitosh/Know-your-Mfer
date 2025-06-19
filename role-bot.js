@@ -25,7 +25,10 @@ const POLICIES = {
   bob: '4552d6234e2a9cf2615220f9dbe1b233c4c2dccbc8d872dcae9a3795',
   mx: 'd2d5dc672cd07a17fec693688cfcea3f4afe6564000eb8d73337b8ae',
   twins: '4d78dc5ed9ea8cc940f8370e0d539fee3cb42d48b501762ba6acaf34',
-  coins: '13f58336e1e11cea3ee956e0311a4ab81fc53de79400b0e019bff5c5'
+  coins: '13f58336e1e11cea3ee956e0311a4ab81fc53de79400b0e019bff5c5',
+  cm: '2aec93fa65aaedaf2fc0aa46c3ace89c0c8e091ed5f39b8f8127e664',
+  wen: 'c6472c03797bbc6973a628e6c25fc67cc65dbc9067cfac3ac630f16a',
+  fuck: 'b8032e903708f429b2cad06f6dbec5d2f75f9ef320a635acf5e6ab12'
 };
 
 // Initialize the Discord client
@@ -111,22 +114,27 @@ function getMferRole(count) {
   return null;
 }
 
-function hasRainbowStampTraits(assets) {
-  const needed = new Set(['Green', 'Blue', 'Navy', 'Red', 'Purple', 'Yellow']);
+function hasRainbowStampTraits(assets, metadata02) {
+  const needed = new Set(['green', 'blue', 'navy', 'red', 'purple', 'yellow']);
+
   for (const asset of assets) {
-    const key = Object.keys(metadata02).find(k => k.endsWith(asset.asset_name));
-    if (key) {
-      const entry = metadata02[key];
-      if (entry && entry['Stamp Color']) {
-        needed.delete(entry['Stamp Color']);
-      }
+    const assetId = asset.policy_id + asset.asset_name; // exact match with metadata02 keys
+    const entry = metadata02[assetId];
+
+    if (entry && entry['Stamp Color']) {
+      const color = entry['Stamp Color'].trim().toLowerCase();
+      needed.delete(color);
+    } else {
+      console.warn(`⚠️ Missing metadata or 'Stamp Color' for asset: ${assetId}`);
     }
+
     if (needed.size === 0) {
-      console.log(`✅ Rainbow stamp colors complete for asset ${asset.asset_name}`);
+      console.log(`✅ Rainbow complete! Last matched: ${assetId}`);
       return true;
     }
   }
-  console.log(`⚠️ Missing rainbow stamp colors: ${Array.from(needed).join(', ')}`);
+
+  console.log(`❌ Missing colors: ${Array.from(needed).join(', ')}`);
   return false;
 }
 
@@ -191,6 +199,9 @@ async function assignRoles() {
       if (policyMap.coins.length >= 1) rolesToAdd.push('Dedicated Mfer');
       if (policyMap.bob.length >= 1) rolesToAdd.push('Back Of Bills');
       if (policyMap.mx.length >= 1) rolesToAdd.push('Sicario');
+      if (policyMap.cm.length >= 1) rolesToAdd.push('Campaign Material');
+      if (policyMap.wen.length >= 1) rolesToAdd.push('WENBOY');
+      if (policyMap.fuck.length >= 1) rolesToAdd.push('you FUCK');
       if (hasRainbowStampTraits(policyMap.otwo)) rolesToAdd.push('Xesserson Rainbow');
 
       rolesData[discordId] = {
